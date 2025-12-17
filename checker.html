@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Insurance policy checker tool for digital nomad visas. Validate your insurance meets requirements for Japan, Spain, UAE and more.">
+  <title>Checker Tool - Insurance Wording Checker</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="container">
+      <div class="header-content">
+        <a href="index.html" class="logo">Insurance Wording Checker</a>
+        <nav>
+          <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="index.html#programs">Programs</a></li>
+            <li><a href="index.html#pricing">Pricing</a></li>
+            <li><a href="index.html#faq">FAQ</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Checker Section -->
+  <section class="section">
+    <div class="container">
+      <h1 class="section-title">Insurance Wording Checker</h1>
+      <p class="section-subtitle">Validate your insurance policy meets digital nomad visa requirements</p>
+
+      <div class="checker-panel">
+        <h2>Check Your Policy - <span class="checks-remaining" id="checks-remaining">2</span> Free Checks Remaining</h2>
+        
+        <div class="form-group">
+          <label for="program-selector" class="form-label">Select Visa Program</label>
+          <select id="program-selector" class="form-select" aria-label="Select visa program">
+            <option value="">Loading programs...</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="policy-text" class="form-label">Paste Your Insurance Policy Text</label>
+          <textarea 
+            id="policy-text" 
+            class="form-textarea" 
+            placeholder="Paste the relevant sections of your insurance policy here. Include:
+- Medical coverage details and limits
+- Geographic coverage area
+- Emergency services and evacuation coverage
+- Any exclusions or limitations
+
+The more complete your text, the more accurate the validation."
+            aria-describedby="disclaimer-text"
+            style="min-height: 300px;"
+          ></textarea>
+        </div>
+
+        <div class="disclaimer" id="disclaimer-text">
+          <strong>Disclaimer:</strong> This tool provides automated guidance based on publicly available visa requirements. Results are for reference only and do not constitute legal or professional advice. Always verify with official embassy/consulate sources before submitting your visa application. Your policy text is processed locally in your browser and never sent to any server.
+        </div>
+
+        <div class="button-group">
+          <button id="check-wording-btn" class="btn btn-primary">Check Wording</button>
+          <button id="export-pdf-btn" class="btn btn-secondary" disabled title="PDF export available in Premium">Export PDF (Premium)</button>
+        </div>
+
+        <!-- Results Container -->
+        <div id="results-container" class="results-container" role="region" aria-live="polite"></div>
+        <div id="results-live-region" class="sr-only" aria-live="assertive" aria-atomic="true"></div>
+      </div>
+
+      <!-- Help Section -->
+      <div style="margin-top: 3rem; background: var(--neutral-50); padding: 2rem; border-radius: var(--border-radius);">
+        <h3 style="margin-bottom: 1rem;">Tips for Best Results</h3>
+        <ul style="line-height: 2; color: var(--neutral-700);">
+          <li>Copy the <strong>entire policy document</strong> or at minimum the sections covering medical coverage, geographic scope, and coverage limits</li>
+          <li>Include any <strong>supplementary documents</strong> or riders that modify coverage</li>
+          <li>Make sure <strong>coverage amounts</strong> are clearly stated with currency (e.g., "$150,000 USD", "€30,000", "¥10,000,000")</li>
+          <li>If your policy uses abbreviations, include the full document so definitions are available</li>
+          <li>Check results carefully - green means the phrase was found, but always <strong>verify with official sources</strong></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h4>Product</h4>
+          <ul class="footer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="index.html#programs">Programs</a></li>
+            <li><a href="index.html#pricing">Pricing</a></li>
+            <li><a href="index.html#faq">FAQ</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-section">
+          <h4>Resources</h4>
+          <ul class="footer-links">
+            <li><a href="index.html#how-it-works">How It Works</a></li>
+            <li><a href="https://github.com/chaos-factory/ideator-execution-008-Digital-nomad-visa-3-Insurance-Wording-Checker-Paste-Validate" target="_blank" rel="noopener">GitHub</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-section">
+          <h4>Legal</h4>
+          <ul class="footer-links">
+            <li><a href="index.html#disclaimer">Disclaimer</a></li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <p><strong>Important Disclaimer:</strong> This tool provides automated analysis based on publicly available visa requirements. Results are for informational purposes only and do not constitute legal, professional, or official advice. Insurance requirements can change without notice. Always verify your insurance meets current requirements directly with the relevant embassy, consulate, or official government sources before submitting your visa application.</p>
+        <p style="margin-top: 1rem;">&copy; 2024 Insurance Wording Checker. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Paywall Modal -->
+  <div id="paywall-modal" class="modal">
+    <div class="modal-content">
+      <h3>Free Checks Used</h3>
+      <p>You've used your 2 free policy checks. Upgrade to Premium for unlimited checks, PDF exports, and priority support.</p>
+      <p><strong>One-time payment of $19 - Lifetime access</strong></p>
+      <div class="modal-buttons">
+        <button id="upgrade-btn" class="btn btn-primary">Upgrade to Premium</button>
+        <button id="close-paywall" class="btn btn-secondary">Maybe Later</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="checker.js" defer></script>
+</body>
+</html>
