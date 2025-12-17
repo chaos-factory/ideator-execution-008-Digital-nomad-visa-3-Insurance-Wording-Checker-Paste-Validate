@@ -1,0 +1,1 @@
+Insurance Wording Checker - Paste & Validate. In-browser regex checker to verify insurance policy text meets required phrases/limits for specific digital-nomad programs (e.g., Japan, Spain, UAE). Paste text, see red/green checklist with explanations and official links, optional PDF. Static JSON requirements/tests; no uploads.
