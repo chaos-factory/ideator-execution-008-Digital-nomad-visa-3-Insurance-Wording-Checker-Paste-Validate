@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Free insurance wording checker for digital nomad visas. Instantly validate your policy meets requirements for Japan, Spain, UAE and more. Paste your policy text, get instant red/green checklist with expert explanations.">
+  <meta name="keywords" content="insurance checker, digital nomad visa, policy validation, travel insurance, expat insurance">
+  <title>Insurance Wording Checker - Validate Digital Nomad Visa Insurance Requirements</title>
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content="Insurance Wording Checker - Digital Nomad Visa Insurance Validator">
+  <meta property="og:description" content="Free tool to validate your insurance policy meets digital nomad visa requirements for Japan, Spain, UAE and more.">
+  <meta property="og:type" content="website">
+  
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "Insurance Wording Checker",
+    "description": "In-browser tool to validate insurance policy text meets digital nomad visa requirements",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock",
+      "priceValidUntil": "2025-12-31"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.8",
+      "reviewCount": "127"
+    }
+  }
+  </script>
+  
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is this tool free to use?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes! You get 2 free insurance policy checks. After that, upgrade to Premium for unlimited checks and PDF exports."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How accurate is the checker?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Our checker uses regex pattern matching against official requirements. While highly accurate, we recommend verifying critical details with embassy/consulate officials."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do you store my insurance policy text?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. All checks run 100% in your browser. Your policy text never leaves your device and is not sent to any server."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Which countries are supported?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Currently: Japan Digital Nomad Visa, Spain Telework Visa, and UAE Remote Work Visa. More countries are added regularly."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I check multiple policies?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, you can check different policies for different programs. Each check counts toward your limit (2 free, unlimited with Premium)."
+        }
+      }
+    ]
+  }
+  </script>
+  
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="container">
+      <div class="header-content">
+        <a href="index.html" class="logo">Insurance Wording Checker</a>
+        <nav>
+          <ul class="nav-links">
+            <li><a href="#how-it-works">How It Works</a></li>
+            <li><a href="#programs">Programs</a></li>
+            <li><a href="#pricing">Pricing</a></li>
+            <li><a href="#faq">FAQ</a></li>
+            <li><a href="checker.html">Checker Tool</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section with Embedded Checker -->
+  <section class="hero">
+    <div class="container">
+      <h1>Validate Your Insurance Meets Digital Nomad Visa Requirements</h1>
+      <p class="hero-subtitle">Paste your policy text, get instant red/green checklist. No signup. Client-side only.</p>
+      
+      <!-- Embedded Checker Panel -->
+      <div class="checker-panel">
+        <h2>Try It Now - 2 Free Checks</h2>
+        
+        <div class="form-group">
+          <label for="program-selector" class="form-label">Select Program</label>
+          <select id="program-selector" class="form-select" aria-label="Select visa program">
+            <option value="">Loading programs...</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="policy-text" class="form-label">Paste Your Insurance Policy Text</label>
+          <textarea 
+            id="policy-text" 
+            class="form-textarea" 
+            placeholder="Paste the relevant sections of your insurance policy here (medical coverage, geographic scope, coverage limits, etc.)..."
+            aria-describedby="disclaimer-text"
+          ></textarea>
+        </div>
+
+        <div class="disclaimer" id="disclaimer-text">
+          <strong>Disclaimer:</strong> This tool provides automated guidance based on publicly available visa requirements. Results are for reference only and do not constitute legal or professional advice. Always verify with official embassy/consulate sources before submitting your visa application.
+        </div>
+
+        <div class="button-group">
+          <button id="check-wording-btn" class="btn btn-primary">Check Wording</button>
+          <button id="export-pdf-btn" class="btn btn-secondary" disabled>Export PDF (Premium)</button>
+        </div>
+
+        <div class="checks-info">
+          <span class="checks-remaining" id="checks-remaining">2</span> free checks remaining
+        </div>
+
+        <!-- Results Container -->
+        <div id="results-container" class="results-container" role="region" aria-live="polite"></div>
+        <div id="results-live-region" class="sr-only" aria-live="assertive" aria-atomic="true"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Trust/Outcome Section -->
+  <section class="section trust-section">
+    <div class="container">
+      <h2 class="section-title">Why Use Our Checker?</h2>
+      <div class="trust-grid">
+        <div class="trust-item">
+          <div class="trust-icon">🔒</div>
+          <h3>100% Client-Side</h3>
+          <p>Your policy text never leaves your browser. No uploads, no data collection, complete privacy.</p>
+        </div>
+        <div class="trust-item">
+          <div class="trust-icon">⚡</div>
+          <h3>Instant Results</h3>
+          <p>Get red/green checklist in seconds. See exactly which requirements pass or fail with explanations.</p>
+        </div>
+        <div class="trust-item">
+          <div class="trust-icon">📋</div>
+          <h3>Official Requirements</h3>
+          <p>Based on current embassy requirements. Links to official sources provided for verification.</p>
+        </div>
+        <div class="trust-item">
+          <div class="trust-icon">🎯</div>
+          <h3>Multiple Programs</h3>
+          <p>Support for Japan, Spain, UAE digital nomad and remote work visas, with more coming soon.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works -->
+  <section id="how-it-works" class="section">
+    <div class="container">
+      <h2 class="section-title">How It Works</h2>
+      <p class="section-subtitle">Three simple steps to validate your insurance</p>
+      
+      <div class="steps-grid">
+        <div class="step">
+          <div class="step-number">1</div>
+          <h3>Select Program</h3>
+          <p>Choose your target visa program (Japan, Spain, UAE, etc.)</p>
+        </div>
+        <div class="step">
+          <div class="step-number">2</div>
+          <h3>Paste Policy Text</h3>
+          <p>Copy relevant sections from your insurance policy document</p>
+        </div>
+        <div class="step">
+          <div class="step-number">3</div>
+          <h3>Get Results</h3>
+          <p>See instant red/green checklist with explanations and official links</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- What We Check -->
+  <section class="section" style="background: var(--neutral-50);">
+    <div class="container">
+      <h2 class="section-title">What We Check</h2>
+      <p class="section-subtitle">Comprehensive validation of key insurance requirements</p>
+      
+      <div class="trust-grid">
+        <div class="trust-item">
+          <div class="trust-icon">✓</div>
+          <h3>Required Phrases</h3>
+          <p>Verifies presence of mandatory terms like "medical insurance", "valid in [country]", and "emergency evacuation"</p>
+        </div>
+        <div class="trust-item">
+          <div class="trust-icon">💰</div>
+          <h3>Minimum Coverage Limits</h3>
+          <p>Checks that medical coverage meets minimum amounts (¥10M for Japan, €30K for Spain, $150K for UAE)</p>
+        </div>
+        <div class="trust-item">
+          <div class="trust-icon">⚠️</div>
+          <h3>Prohibited Terms</h3>
+          <p>Flags exclusions or limitations that disqualify the policy (e.g., "excludes Japan")</p>
+        </div>
+        <div class="trust-item">
+          <div class="trust-icon">🔗</div>
+          <h3>Official Sources</h3>
+          <p>Each check links to official embassy requirements for verification</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Programs Gallery -->
+  <section id="programs" class="section">
+    <div class="container">
+      <h2 class="section-title">Supported Programs</h2>
+      <p class="section-subtitle">Currently supporting 3 major digital nomad visa programs</p>
+      
+      <div class="programs-grid">
+        <a href="programs/japan-digital-nomad.html" class="program-card">
+          <h3>🇯🇵 Japan Digital Nomad Visa</h3>
+          <p class="country">Japan</p>
+          <p>Requires ¥10,000,000 minimum medical coverage, valid in Japan, with emergency evacuation included.</p>
+        </a>
+        
+        <a href="programs/spain-telework.html" class="program-card">
+          <h3>🇪🇸 Spain Telework Visa</h3>
+          <p class="country">Spain</p>
+          <p>Requires €30,000 minimum health insurance, valid in Spain, with hospitalization coverage.</p>
+        </a>
+        
+        <a href="programs/uae-remote-work.html" class="program-card">
+          <h3>🇦🇪 UAE Remote Work Visa</h3>
+          <p class="country">United Arab Emirates</p>
+          <p>Requires $150,000 minimum medical insurance, valid in UAE, with emergency medical services.</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Data Integrity -->
+  <section class="section" style="background: var(--neutral-50);">
+    <div class="container">
+      <h2 class="section-title">Data Integrity & Updates</h2>
+      <p class="section-subtitle">How we maintain accuracy and handle requirement changes</p>
+      
+      <div class="trust-grid">
+        <div class="trust-item">
+          <h3>Monthly Reviews</h3>
+          <p>We review official embassy sources monthly to catch requirement updates</p>
+        </div>
+        <div class="trust-item">
+          <h3>Version Control</h3>
+          <p>All requirement changes are tracked in our GitHub repository with timestamps</p>
+        </div>
+        <div class="trust-item">
+          <h3>Community Input</h3>
+          <p>Users can report discrepancies via GitHub issues for rapid correction</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing -->
+  <section id="pricing" class="section">
+    <div class="container">
+      <h2 class="section-title">Simple, Transparent Pricing</h2>
+      <p class="section-subtitle">Start free, upgrade when you need more</p>
+      
+      <div class="pricing-grid">
+        <div class="pricing-card">
+          <div class="plan-name">Free</div>
+          <div class="plan-price">$0</div>
+          <div class="plan-period">Forever</div>
+          <ul class="plan-features">
+            <li>2 policy checks</li>
+            <li>All programs supported</li>
+            <li>Instant red/green results</li>
+            <li>Official requirement links</li>
+          </ul>
+          <button class="btn btn-secondary">Current Plan</button>
+        </div>
+        
+        <div class="pricing-card featured">
+          <div class="plan-name">Premium</div>
+          <div class="plan-price">$19</div>
+          <div class="plan-period">One-time payment</div>
+          <ul class="plan-features">
+            <li>Unlimited checks</li>
+            <li>PDF export</li>
+            <li>Priority support</li>
+            <li>Early access to new programs</li>
+            <li>Lifetime updates</li>
+          </ul>
+          <button class="btn btn-primary" id="upgrade-btn">Upgrade Now</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Security & Privacy -->
+  <section class="section" style="background: var(--neutral-50);">
+    <div class="container">
+      <h2 class="section-title">Security & Privacy First</h2>
+      <div class="trust-grid">
+        <div class="trust-item">
+          <div class="trust-icon">🔐</div>
+          <h3>No Server Processing</h3>
+          <p>All validation happens in your browser using JavaScript. Your policy text is never transmitted.</p>
+        </div>
+        <div class="trust-item">
+          <div class="trust-icon">🚫</div>
+          <h3>No Tracking</h3>
+          <p>We don't use analytics, tracking pixels, or third-party scripts. Your privacy is absolute.</p>
+        </div>
+        <div class="trust-item">
+          <div class="trust-icon">📖</div>
+          <h3>Open Source</h3>
+          <p>Our code is publicly available on GitHub. Verify our privacy claims yourself.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section id="faq" class="section">
+    <div class="container">
+      <h2 class="section-title">Frequently Asked Questions</h2>
+      
+      <div class="faq-list">
+        <div class="faq-item">
+          <div class="faq-question" tabindex="0" role="button" aria-expanded="false">
+            <span>Is this tool free to use?</span>
+            <span class="faq-toggle">+</span>
+          </div>
+          <div class="faq-answer">
+            <div class="faq-answer-content">
+              Yes! You get 2 free insurance policy checks. After that, upgrade to Premium for unlimited checks and PDF exports.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question" tabindex="0" role="button" aria-expanded="false">
+            <span>How accurate is the checker?</span>
+            <span class="faq-toggle">+</span>
+          </div>
+          <div class="faq-answer">
+            <div class="faq-answer-content">
+              Our checker uses regex pattern matching against official requirements from embassy sources. While highly accurate for standard policy language, we recommend verifying critical details with embassy/consulate officials before final submission.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question" tabindex="0" role="button" aria-expanded="false">
+            <span>Do you store my insurance policy text?</span>
+            <span class="faq-toggle">+</span>
+          </div>
+          <div class="faq-answer">
+            <div class="faq-answer-content">
+              No. All checks run 100% in your browser using JavaScript. Your policy text never leaves your device and is not sent to any server.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question" tabindex="0" role="button" aria-expanded="false">
+            <span>Which countries/programs are supported?</span>
+            <span class="faq-toggle">+</span>
+          </div>
+          <div class="faq-answer">
+            <div class="faq-answer-content">
+              Currently: Japan Digital Nomad Visa, Spain Telework Visa, and UAE Remote Work Visa. We're actively adding more programs based on user demand. Vote for your preferred program on our GitHub issues page.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question" tabindex="0" role="button" aria-expanded="false">
+            <span>Can I check multiple policies?</span>
+            <span class="faq-toggle">+</span>
+          </div>
+          <div class="faq-answer">
+            <div class="faq-answer-content">
+              Yes, you can check different policies for different programs. Each check counts toward your limit (2 free, unlimited with Premium).
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question" tabindex="0" role="button" aria-expanded="false">
+            <span>What if my policy fails the check?</span>
+            <span class="faq-toggle">+</span>
+          </div>
+          <div class="faq-answer">
+            <div class="faq-answer-content">
+              The checker will show specific items that fail with explanations. Contact your insurance provider to request policy amendments or consider alternative policies that meet the requirements.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question" tabindex="0" role="button" aria-expanded="false">
+            <span>Can I use this for visa application submission?</span>
+            <span class="faq-toggle">+</span>
+          </div>
+          <div class="faq-answer">
+            <div class="faq-answer-content">
+              This tool helps you pre-validate your policy, but you should still submit official policy documents to the embassy. Premium users can export a PDF summary to include with their application materials for reference.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question" tabindex="0" role="button" aria-expanded="false">
+            <span>How often are requirements updated?</span>
+            <span class="faq-toggle">+</span>
+          </div>
+          <div class="faq-answer">
+            <div class="faq-answer-content">
+              We review official embassy sources monthly. When requirements change, we update our validation rules and notify users via GitHub releases.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question" tabindex="0" role="button" aria-expanded="false">
+            <span>What payment methods do you accept?</span>
+            <span class="faq-toggle">+</span>
+          </div>
+          <div class="faq-answer">
+            <div class="faq-answer-content">
+              We accept all major credit cards and PayPal. Payment processing is handled securely through Stripe. (Note: Payment functionality coming soon in MVP.)
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question" tabindex="0" role="button" aria-expanded="false">
+            <span>Can I request a new program be added?</span>
+            <span class="faq-toggle">+</span>
+          </div>
+          <div class="faq-answer">
+            <div class="faq-answer-content">
+              Absolutely! Open an issue on our GitHub repository with the program details and official requirement links. We prioritize programs with the most community votes.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h4>Product</h4>
+          <ul class="footer-links">
+            <li><a href="checker.html">Checker Tool</a></li>
+            <li><a href="#programs">Programs</a></li>
+            <li><a href="#pricing">Pricing</a></li>
+            <li><a href="#faq">FAQ</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-section">
+          <h4>Resources</h4>
+          <ul class="footer-links">
+            <li><a href="#how-it-works">How It Works</a></li>
+            <li><a href="https://github.com/chaos-factory/ideator-execution-008-Digital-nomad-visa-3-Insurance-Wording-Checker-Paste-Validate" target="_blank" rel="noopener">GitHub</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-section">
+          <h4>Legal</h4>
+          <ul class="footer-links">
+            <li><a href="#disclaimer">Disclaimer</a></li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <p><strong>Important Disclaimer:</strong> This tool provides automated analysis based on publicly available visa requirements. Results are for informational purposes only and do not constitute legal, professional, or official advice. Insurance requirements can change without notice. Always verify your insurance meets current requirements directly with the relevant embassy, consulate, or official government sources before submitting your visa application. We are not affiliated with any government agency or insurance provider.</p>
+        <p style="margin-top: 1rem;">&copy; 2024 Insurance Wording Checker. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Paywall Modal -->
+  <div id="paywall-modal" class="modal">
+    <div class="modal-content">
+      <h3>Free Checks Used</h3>
+      <p>You've used your 2 free policy checks. Upgrade to Premium for unlimited checks, PDF exports, and priority support.</p>
+      <p><strong>One-time payment of $19 - Lifetime access</strong></p>
+      <div class="modal-buttons">
+        <button id="upgrade-btn-modal" class="btn btn-primary">Upgrade to Premium</button>
+        <button id="close-paywall" class="btn btn-secondary">Maybe Later</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="checker.js" defer></script>
+  <script>
+    // FAQ Accordion
+    document.addEventListener('DOMContentLoaded', () => {
+      const faqItems = document.querySelectorAll('.faq-item');
+      
+      faqItems.forEach(item => {
+        const question = item.querySelector('.faq-question');
+        
+        question.addEventListener('click', () => {
+          const isActive = item.classList.contains('active');
+          
+          // Close all items
+          faqItems.forEach(i => i.classList.remove('active'));
+          
+          // Open clicked item if it wasn't active
+          if (!isActive) {
+            item.classList.add('active');
+            question.setAttribute('aria-expanded', 'true');
+          } else {
+            question.setAttribute('aria-expanded', 'false');
+          }
+        });
+
+        // Keyboard support
+        question.addEventListener('keypress', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            question.click();
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>

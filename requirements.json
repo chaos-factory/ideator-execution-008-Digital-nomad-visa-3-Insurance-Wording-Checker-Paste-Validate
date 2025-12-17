@@ -1,0 +1,133 @@
+{
+  "programs": [
+    {
+      "id": "japan-digital-nomad",
+      "name": "Japan Digital Nomad Visa",
+      "country": "Japan",
+      "officialUrl": "https://www.mofa.go.jp/j_info/visit/visa/index.html",
+      "requirements": {
+        "requiredPhrases": [
+          {
+            "phrase": "medical insurance",
+            "regex": "medical\\s+insurance",
+            "tooltip": "Policy must explicitly mention 'medical insurance' coverage"
+          },
+          {
+            "phrase": "valid in Japan",
+            "regex": "(valid|coverage)\\s+(in|for)\\s+Japan",
+            "tooltip": "Insurance must be valid in Japan or specify Japan coverage"
+          },
+          {
+            "phrase": "emergency evacuation",
+            "regex": "emergency\\s+(evacuation|repatriation)",
+            "tooltip": "Must include emergency evacuation or repatriation coverage"
+          }
+        ],
+        "minMedicalLimit": {
+          "amount": 10000000,
+          "currency": "JPY",
+          "regex": "medical.*?(\\d{1,3}(?:,\\d{3})*(?:\\.\\d+)?)\\s*(million|JPY|yen)",
+          "tooltip": "Minimum medical coverage of ¥10,000,000 (or equivalent) required"
+        },
+        "prohibitedPhrases": [
+          {
+            "phrase": "excludes Japan",
+            "regex": "exclud(es?|ing).*?Japan",
+            "tooltip": "Policy must not exclude Japan from coverage"
+          },
+          {
+            "phrase": "travel insurance only",
+            "regex": "travel\\s+insurance\\s+only",
+            "tooltip": "Basic travel insurance alone may not meet requirements"
+          }
+        ]
+      }
+    },
+    {
+      "id": "spain-telework",
+      "name": "Spain Telework Visa",
+      "country": "Spain",
+      "officialUrl": "https://www.inclusion.gob.es/en/index.htm",
+      "requirements": {
+        "requiredPhrases": [
+          {
+            "phrase": "health insurance",
+            "regex": "health\\s+insurance",
+            "tooltip": "Policy must explicitly mention 'health insurance' coverage"
+          },
+          {
+            "phrase": "valid in Spain",
+            "regex": "(valid|coverage)\\s+(in|for)\\s+Spain",
+            "tooltip": "Insurance must be valid in Spain or specify Spain coverage"
+          },
+          {
+            "phrase": "hospitalization",
+            "regex": "hospitali[sz]ation",
+            "tooltip": "Must include hospitalization coverage"
+          }
+        ],
+        "minMedicalLimit": {
+          "amount": 30000,
+          "currency": "EUR",
+          "regex": "medical.*?(\\d{1,3}(?:,\\d{3})*(?:\\.\\d+)?)\\s*(EUR|euro|€)",
+          "tooltip": "Minimum medical coverage of €30,000 required"
+        },
+        "prohibitedPhrases": [
+          {
+            "phrase": "excludes EU",
+            "regex": "exclud(es?|ing).*(EU|Europe|Spain)",
+            "tooltip": "Policy must not exclude EU or Spain from coverage"
+          },
+          {
+            "phrase": "short-term only",
+            "regex": "short[\\s-]term\\s+only",
+            "tooltip": "Policy must provide coverage for extended stays"
+          }
+        ]
+      }
+    },
+    {
+      "id": "uae-remote-work",
+      "name": "UAE Remote Work Visa",
+      "country": "United Arab Emirates",
+      "officialUrl": "https://u.ae/en/information-and-services/visa-and-emirates-id/residence-visas/remote-work-visa",
+      "requirements": {
+        "requiredPhrases": [
+          {
+            "phrase": "medical insurance",
+            "regex": "medical\\s+insurance",
+            "tooltip": "Policy must explicitly mention 'medical insurance' coverage"
+          },
+          {
+            "phrase": "valid in UAE",
+            "regex": "(valid|coverage)\\s+(in|for)\\s+(UAE|United Arab Emirates|Dubai)",
+            "tooltip": "Insurance must be valid in UAE"
+          },
+          {
+            "phrase": "emergency medical",
+            "regex": "emergency\\s+medical",
+            "tooltip": "Must include emergency medical coverage"
+          }
+        ],
+        "minMedicalLimit": {
+          "amount": 150000,
+          "currency": "USD",
+          "regex": "medical.*?(\\d{1,3}(?:,\\d{3})*(?:\\.\\d+)?)\\s*(USD|dollar|\\$)",
+          "tooltip": "Minimum medical coverage of $150,000 required"
+        },
+        "prohibitedPhrases": [
+          {
+            "phrase": "excludes UAE",
+            "regex": "exclud(es?|ing).*(UAE|United Arab Emirates|Middle East)",
+            "tooltip": "Policy must not exclude UAE from coverage"
+          },
+          {
+            "phrase": "tourist visa only",
+            "regex": "tourist\\s+(visa|coverage)\\s+only",
+            "tooltip": "Tourist-only coverage may not meet work visa requirements"
+          }
+        ]
+      }
+    }
+  ]
+}
